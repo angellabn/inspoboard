@@ -66,39 +66,43 @@ function renderTasks() {
 
 // ⏱ Pomodoro Timer
 let timer;
-let minutes = 25;
-let seconds = 0;
 let isRunning = false;
+let totalSeconds = 25 * 60;
 
-document.getElementById("start-timer").addEventListener("click", () => {
+const timerDisplay = document.getElementById("timer");
+const startButton = document.getElementById("start-timer");
+
+function formatTime(seconds) {
+  const m = Math.floor(seconds / 60);
+  const s = seconds % 60;
+  return `${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`;
+}
+
+// ⏳ Update the timer display
+function updateTimer() {
+  if (totalSeconds > 0) {
+    totalSeconds--;
+    timerDisplay.textContent = formatTime(totalSeconds);
+  } else {
+    clearInterval(timer);
+    timerDisplay.textContent = "🎉 Done!";
+    isRunning = false;
+    alert("Pomodoro complete! Take a break 😌");
+    startButton.textContent = "Restart";
+  }
+}
+
+// ▶️ Start/Restart button logic
+startButton.addEventListener("click", () => {
   if (!isRunning) {
     isRunning = true;
+    totalSeconds = 25 * 60; // reset to 25 min every time
+    timerDisplay.textContent = formatTime(totalSeconds);
+    startButton.textContent = "Running...";
     timer = setInterval(updateTimer, 1000);
   }
 });
 
-function updateTimer() {
-  const display = document.getElementById("timer");
-
-  if (seconds === 0) {
-    if (minutes === 0) {
-      clearInterval(timer);
-      display.textContent = "🎉 Done!";
-      alert("Pomodoro complete! Time for a break.");
-      isRunning = false;
-      return;
-    } else {
-      minutes--;
-      seconds = 59;
-    }
-  } else {
-    seconds--;
-  }
-
-  const minStr = String(minutes).padStart(2, '0');
-  const secStr = String(seconds).padStart(2, '0');
-  display.textContent = `${minStr}:${secStr}`;
-}
 
 // 🚀 Load saved state on page load
 window.onload = () => {
