@@ -55,3 +55,18 @@
     border-radius: 5px;
   }
   
+  /* Dark theme */
+body.dark-theme {
+  background-color: #121212;
+  color: #fff;
+}
+
+body.dark-theme textarea {
+  background-color: #333;
+  color: white;
+}
+
+body.dark-theme button {
+  background-color: #444;
+  color: white;
+}
