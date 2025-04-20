@@ -64,33 +64,47 @@ function renderTasks() {
   });
 }
 
-// ⏱ Pomodoro Timer
-let timer;
-let isRunning = false;
-let totalSeconds = 25 * 60;
+/// Pomodoro Timer
+let timerInterval;
+let isTimerRunning = false;
+let totalTime = 25 * 60; // 25 minutes in seconds
 
 const timerDisplay = document.getElementById("timer");
-const startButton = document.getElementById("start-timer");
+const startTimerBtn = document.getElementById("start-timer");
 
 function formatTime(seconds) {
-  const m = Math.floor(seconds / 60);
-  const s = seconds % 60;
-  return `${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`;
+  const mins = String(Math.floor(seconds / 60)).padStart(2, '0');
+  const secs = String(seconds % 60).padStart(2, '0');
+  return `${mins}:${secs}`;
 }
 
-// ⏳ Update the timer display
-function updateTimer() {
-  if (totalSeconds > 0) {
-    totalSeconds--;
-    timerDisplay.textContent = formatTime(totalSeconds);
-  } else {
-    clearInterval(timer);
-    timerDisplay.textContent = "🎉 Done!";
-    isRunning = false;
-    alert("Pomodoro complete! Take a break 😌");
-    startButton.textContent = "Restart";
-  }
+function startPomodoro() {
+  if (isTimerRunning) return;
+
+  isTimerRunning = true;
+  let timeLeft = totalTime;
+  timerDisplay.textContent = formatTime(timeLeft);
+  startTimerBtn.textContent = "Running...";
+
+  timerInterval = setInterval(() => {
+    timeLeft--;
+    timerDisplay.textContent = formatTime(timeLeft);
+
+    if (timeLeft <= 0) {
+      clearInterval(timerInterval);
+      timerDisplay.textContent = "🎉 Done!";
+      startTimerBtn.textContent = "Restart";
+      isTimerRunning = false;
+    }
+  }, 1000);
 }
+
+startTimerBtn.addEventListener("click", () => {
+  if (!isTimerRunning) {
+    clearInterval(timerInterval); // Clear any previous timer
+    startPomodoro();
+  }
+});
 
 // ▶️ Start/Restart button logic
 startButton.addEventListener("click", () => {
