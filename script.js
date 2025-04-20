@@ -16,10 +16,46 @@ function saveGoals() {
   alert("Goals saved!");
 }
 
-// Load saved goals on page load
+// Save tasks in local storage
+function saveTasks() {
+  const task = document.getElementById('task').value.trim();
+  if (task === "") return; // Prevent saving empty tasks
+  let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+  tasks.push(task);
+  localStorage.setItem('tasks', JSON.stringify(tasks));
+  document.getElementById('task').value = ""; // Clear input
+  renderTasks();
+}
+
+// Display tasks from localStorage
+function renderTasks() {
+  const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+  const taskList = document.getElementById('task-list');
+  taskList.innerHTML = tasks.map(task => `<li>${task}</li>`).join('');
+}
+
+// Theme toggle
+const themeButton = document.getElementById("theme-toggle");
+if (themeButton) {
+  themeButton.addEventListener("click", () => {
+    document.body.classList.toggle("dark-theme");
+    localStorage.setItem("theme", document.body.classList.contains("dark-theme") ? "dark" : "light");
+  });
+}
+
+// Load everything on page load
 window.onload = function () {
-  const saved = localStorage.getItem("dailyGoals");
-  if (saved) {
-    document.getElementById("goals").value = saved;
+  // Load saved goals
+  const savedGoals = localStorage.getItem("dailyGoals");
+  if (savedGoals) {
+    document.getElementById("goals").value = savedGoals;
   }
+
+  // Load saved theme
+  if (localStorage.getItem("theme") === "dark") {
+    document.body.classList.add("dark-theme");
+  }
+
+  // Load tasks
+  renderTasks();
 };
