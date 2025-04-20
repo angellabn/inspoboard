@@ -1,0 +1,57 @@
+* {
+    box-sizing: border-box;
+  }
+  
+  body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+  }
+  
+  .overlay {
+    background-color: rgba(0, 0, 0, 0.5);
+    height: 100%;
+    padding: 40px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .quote-box {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+    max-width: 600px;
+  }
+  
+  #author {
+    font-size: 1em;
+    color: #ccc;
+  }
+  
+  textarea {
+    width: 80%;
+    height: 100px;
+    font-size: 1em;
+    padding: 10px;
+    margin: 20px 0;
+    resize: none;
+    border: none;
+    border-radius: 10px;
+  }
+  
+  button {
+    padding: 10px 20px;
+    font-size: 1em;
+    cursor: pointer;
+    background: white;
+    color: black;
+    border: none;
+    border-radius: 5px;
+  }
+  
