@@ -118,6 +118,18 @@ startBtn.addEventListener("click", startTimer);
 pauseBtn.addEventListener("click", pauseTimer);
 resetBtn.addEventListener("click", resetTimer);
 
+// 🎉 Confetti Celebration
+function celebrate() {
+  confetti({
+    particleCount: 100,
+    spread: 70,
+    origin: { x: 0.5, y: 0.7 }
+  });
+}
+
+// Example: Attach celebration to a button
+document.querySelector('button').addEventListener('click', celebrate);
+
 // 🚀 Load saved state on page load
 window.onload = () => {
   const savedGoals = localStorage.getItem("dailyGoals");
