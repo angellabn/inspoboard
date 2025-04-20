@@ -37,12 +37,23 @@
       <ul id="task-list"></ul>
     </div>
 
-    <div class="timer-section">
-      <h3>Pomodoro Timer</h3>
-      <div id="timer">25:00</div>
-      <button id="start-timer">Start</button>
-    </div>
-    
+    <!-- Pomodoro Timer Section -->
+<div class="timer-section">
+  <h3>Pomodoro Timer</h3>
+  <div class="circular-timer">
+    <svg width="160" height="160">
+      <circle cx="80" cy="80" r="70" class="bg"></circle>
+      <circle cx="80" cy="80" r="70" id="progress-circle"></circle>
+    </svg>
+    <div id="timer-text">25:00</div>
+  </div>
+  <div class="timer-buttons">
+    <button id="start-timer">Start</button>
+    <button id="pause-timer">Pause</button>
+    <button id="reset-timer">Reset</button>
+  </div>
+</div>
+
 
   </div>
 
