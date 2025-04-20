@@ -1,75 +1,111 @@
-// Set random background from Unsplash
-document.body.style.backgroundImage = `url('https://source.unsplash.com/1600x900/?nature,landscape')`;
+// 🌄 Set a beautiful background from Unsplash
+document.body.style.backgroundImage = `url('https://source.unsplash.com/1600x900/?inspiration,nature')`;
 
-// Load quote from Quotable API
+// 🖌 Handle color picker background override
+const colorPicker = document.getElementById("color-picker");
+colorPicker.addEventListener("input", (e) => {
+  document.body.style.backgroundImage = "none"; // disable image
+  document.body.style.backgroundColor = e.target.value;
+});
+
+// ✨ Load a quote
 fetch("https://api.quotable.io/random")
   .then(res => res.json())
   .then(data => {
     document.getElementById("quote").innerText = `"${data.content}"`;
     document.getElementById("author").innerText = `— ${data.author}`;
+  })
+  .catch(() => {
+    document.getElementById("quote").innerText = `"Stay positive, work hard, make it happen!"`;
+    document.getElementById("author").innerText = "— Unknown";
   });
 
-// Save goals to local storage
+// 💾 Save Goals
 function saveGoals() {
   const goals = document.getElementById("goals").value;
   localStorage.setItem("dailyGoals", goals);
-  alert("Goals saved!");
+  alert("🎯 Goals saved!");
 }
 
-// Save tasks in local storage
+// ✅ Save Tasks
 function saveTasks() {
-  const task = document.getElementById('task').value.trim();
-  if (task === "") return; // Prevent saving empty tasks
-  let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+  const taskInput = document.getElementById("task");
+  const task = taskInput.value.trim();
+  if (task === "") return;
+  
+  const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
   tasks.push(task);
-  localStorage.setItem('tasks', JSON.stringify(tasks));
-  document.getElementById('task').value = ""; // Clear input
+  localStorage.setItem("tasks", JSON.stringify(tasks));
+  taskInput.value = "";
   renderTasks();
 }
 
-// Display tasks from localStorage
+// 📋 Render Tasks
 function renderTasks() {
-  const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
-  const taskList = document.getElementById('task-list');
-  taskList.innerHTML = tasks.map(task => `<li>${task}</li>`).join('');
-}
+  const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+  const taskList = document.getElementById("task-list");
+  taskList.innerHTML = "";
 
-// Theme toggle
-const themeButton = document.getElementById("theme-toggle");
-if (themeButton) {
-  themeButton.addEventListener("click", () => {
-    document.body.classList.toggle("dark-theme");
-    localStorage.setItem("theme", document.body.classList.contains("dark-theme") ? "dark" : "light");
+  tasks.forEach((task, index) => {
+    const li = document.createElement("li");
+    li.textContent = task;
+
+    // 🗑 Add delete on click
+    li.addEventListener("click", () => {
+      if (confirm(`Delete task: "${task}"?`)) {
+        tasks.splice(index, 1);
+        localStorage.setItem("tasks", JSON.stringify(tasks));
+        renderTasks();
+      }
+    });
+
+    li.title = "Click to delete";
+    taskList.appendChild(li);
   });
 }
 
-// Load everything on page load
-window.onload = function () {
-  // Load saved goals
+// ⏱ Pomodoro Timer
+let timer;
+let minutes = 25;
+let seconds = 0;
+let isRunning = false;
+
+document.getElementById("start-timer").addEventListener("click", () => {
+  if (!isRunning) {
+    isRunning = true;
+    timer = setInterval(updateTimer, 1000);
+  }
+});
+
+function updateTimer() {
+  const display = document.getElementById("timer");
+
+  if (seconds === 0) {
+    if (minutes === 0) {
+      clearInterval(timer);
+      display.textContent = "🎉 Done!";
+      alert("Pomodoro complete! Time for a break.");
+      isRunning = false;
+      return;
+    } else {
+      minutes--;
+      seconds = 59;
+    }
+  } else {
+    seconds--;
+  }
+
+  const minStr = String(minutes).padStart(2, '0');
+  const secStr = String(seconds).padStart(2, '0');
+  display.textContent = `${minStr}:${secStr}`;
+}
+
+// 🚀 Load saved state on page load
+window.onload = () => {
   const savedGoals = localStorage.getItem("dailyGoals");
   if (savedGoals) {
     document.getElementById("goals").value = savedGoals;
   }
 
-  // Load saved theme
-  if (localStorage.getItem("theme") === "dark") {
-    document.body.classList.add("dark-theme");
-  }
-
-  // Load tasks
   renderTasks();
-};
-
-// Save journal entries
-function saveJournal() {
-  const journalEntry = document.getElementById("journal").value;
-  localStorage.setItem("journalEntry", journalEntry);
-}
-
-// Load journal entry
-window.onload = function() {
-  const savedJournal = localStorage.getItem("journalEntry");
-  if (savedJournal) {
-    document.getElementById("journal").value = savedJournal;
-  }
 };

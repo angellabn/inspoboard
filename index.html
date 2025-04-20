@@ -1,44 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>InspoBoard</title>
-    <link rel="stylesheet" href="style.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-  </head>  
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>InspoBoard</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
 <body>
   <div class="overlay">
-    <!-- Color Picker -->
+    
+    <!-- 🎨 Color Picker -->
     <div class="color-picker-section">
-      <label for="color-picker">Pick a background color:</label>
+      <label for="color-picker">🎨 Pick a background color:</label>
       <input type="color" id="color-picker" />
     </div>
 
-    <!-- Quote Section -->
+    <!-- ✨ Daily Quote -->
     <div class="quote-box">
       <p id="quote">Loading quote...</p>
       <span id="author"></span>
     </div>
 
-    <!-- Goals Section -->
-    <textarea id="goals" placeholder="What are your goals today?"></textarea>
-    <button onclick="saveGoals()">Save</button>
-
-    <!-- Task Manager Section -->
+    <!-- 🎯 Goals Section -->
     <div class="task-section">
-      <h3>Task List</h3>
+      <h3>🎯 Your Daily Goals</h3>
+      <textarea id="goals" placeholder="What are your goals today?"></textarea>
+      <button onclick="saveGoals()">Save Goals</button>
+    </div>
+
+    <!-- ✅ Task Manager -->
+    <div class="task-section">
+      <h3>📝 Task List</h3>
       <input type="text" id="task" placeholder="Add a new task" />
-      <button onclick="saveTasks()">Save Task</button>
+      <button onclick="saveTasks()">Add Task</button>
       <ul id="task-list"></ul>
     </div>
 
-    <!-- Pomodoro Timer Section -->
+    <!-- ⏱ Pomodoro Timer -->
     <div class="timer-section">
-      <h3>Pomodoro Timer</h3>
+      <h3>⏱ Pomodoro Timer</h3>
       <div id="timer">25:00</div>
       <button id="start-timer">Start</button>
     </div>
+
   </div>
 
   <script src="script.js"></script>
