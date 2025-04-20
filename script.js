@@ -59,3 +59,17 @@ window.onload = function () {
   // Load tasks
   renderTasks();
 };
+
+// Save journal entries
+function saveJournal() {
+  const journalEntry = document.getElementById("journal").value;
+  localStorage.setItem("journalEntry", journalEntry);
+}
+
+// Load journal entry
+window.onload = function() {
+  const savedJournal = localStorage.getItem("journalEntry");
+  if (savedJournal) {
+    document.getElementById("journal").value = savedJournal;
+  }
+};
