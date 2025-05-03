@@ -74,23 +74,25 @@ input[type="color"] {
 
 /* Buttons */
 button {
-  background: #ffd369;
-  color: #000;
-  padding: 10px 24px;
-  font-size: 1em;
+  background-color: #ff7f50;
+  color: white;
+  padding: 10px 20px;
   border: none;
-  border-radius: 10px;
-  margin: 10px;
+  border-radius: 12px;
+  font-size: 16px;
   cursor: pointer;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
   transition: all 0.3s ease;
 }
 
-/* Hover Effect */
 button:hover {
-  transform: scale(1.05); /* Slightly enlarge */
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  animation: wiggle 0.5s infinite; /* Add a wiggle effect */
+  transform: scale(1.05);
+  background-color: #ff5722;
+}
+
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
 }
 
 @keyframes wiggle {

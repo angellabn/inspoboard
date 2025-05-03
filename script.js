@@ -9,16 +9,13 @@ colorPicker.addEventListener("input", (e) => {
 });
 
 // ✨ Load a quote
-fetch("https://api.quotable.io/random")
+fetch('data/quotes.json')
   .then(res => res.json())
   .then(data => {
-    document.getElementById("quote").innerText = `"${data.content}"`;
-    document.getElementById("author").innerText = `— ${data.author}`;
-  })
-  .catch(() => {
-    document.getElementById("quote").innerText = `"Stay positive, work hard, make it happen!"`;
-    document.getElementById("author").innerText = "— Unknown";
+    const random = data[Math.floor(Math.random() * data.length)];
+    document.getElementById("quote").innerText = `"${random.text}" — ${random.author}`;
   });
+
 
 // 💾 Save Goals
 function saveGoals() {
