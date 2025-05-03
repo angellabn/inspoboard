@@ -83,12 +83,13 @@ button {
   margin: 10px;
   cursor: pointer;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
-  transition: transform 0.2s;
+  transition: all 0.3s ease;
 }
 
 /* Hover Effect */
 button:hover {
-  transform: scale(1.1); /* Slightly enlarge */
+  transform: scale(1.05); /* Slightly enlarge */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   animation: wiggle 0.5s infinite; /* Add a wiggle effect */
 }
 
