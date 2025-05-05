@@ -7,6 +7,7 @@
   <title>InspoBoard</title>
   <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
   <header class="main-header">
@@ -14,47 +15,124 @@
     <p>Your daily dose of goals, tasks & focus</p>
   </header>
 
-  <div class="overlay">
-    <!-- Quote Section -->
-    <section class="quote-box">
-      <blockquote id="quote">"Stay positive, work hard, make it happen."</blockquote>
-      <cite id="author">– Unknown</cite>
-    </section>
+  <div class="container">
+    <div class="overlay">
+      <!-- Quote Section -->
+      <section class="quote-box">
+        <div class="section-header">
+          <h2>Daily Inspiration</h2>
+          <div class="icon"><i class="fas fa-lightbulb"></i></div>
+        </div>
+        <blockquote id="quote">"Stay positive, work hard, make it happen."</blockquote>
+        <cite id="author">– Unknown</cite>
+        <button id="next-quote" class="quote-button">Next Quote</button>
+        <button id="save-quote" class="quote-button">Save Quote</button>
+      </section>
+      
+      <!-- Saved Quotes Section -->
+      <section class="saved-quotes-section">
+        <div class="section-header">
+          <h2>Saved Quotes</h2>
+          <div class="icon"><i class="fas fa-bookmark"></i></div>
+        </div>
+        <ul id="saved-quotes-list"></ul>
+      </section>
 
-    <!-- Task Section -->
-    <section class="task-section">
-      <h2>Your Daily Goals</h2>
-      <textarea id="goals" rows="3" placeholder="Write your goals here..."></textarea>
-      <button id="save-goals" onclick="saveGoals()">Save Goals</button>
+      <!-- Task Section -->
+      <section class="task-section">
+        <div class="section-header">
+          <h2>Your Daily Goals</h2>
+          <div class="icon"><i class="fas fa-bullseye"></i></div>
+        </div>
+        <textarea id="goals" rows="3" placeholder="Write your goals here..."></textarea>
+        <button id="save-goals" onclick="saveGoals()">Save Goals</button>
 
-      <h2>Task List</h2>
-      <input type="text" id="task" placeholder="Add a task...">
-      <button id="add-task" onclick="saveTasks()">Add Task</button>
-      <ul id="task-list"></ul>
-    </section>
+        <div class="section-header sub-header">
+          <h2>Task List</h2>
+          <div class="icon"><i class="fas fa-tasks"></i></div>
+        </div>
+        <div class="task-input-container">
+          <input type="text" id="task" placeholder="Add a task...">
+          <button id="add-task" onclick="saveTasks()">Add Task</button>
+        </div>
+        <ul id="task-list"></ul>
+      </section>
 
-    <!-- Timer Section -->
-    <section class="timer-section">
-      <h2>Pomodoro Timer</h2>
-      <div class="circular-timer">
-        <svg width="160" height="160">
-          <circle class="bg" cx="80" cy="80" r="70" />
-          <circle id="progress-circle" cx="80" cy="80" r="70" />
-        </svg>
-        <div id="timer-text">25:00</div>
-      </div>
-      <div class="timer-buttons">
-        <button id="start-timer" onclick="startTimer()">Start</button>
-        <button id="pause-timer" onclick="pauseTimer()">Pause</button>
-        <button id="reset-timer" onclick="resetTimer()">Reset</button>
-      </div>
-    </section>
+      <!-- Timer Section -->
+      <section class="timer-section">
+        <div class="section-header">
+          <h2>Pomodoro Timer</h2>
+          <div class="icon"><i class="fas fa-clock"></i></div>
+        </div>
+        <div class="timer-settings">
+          <label for="work-duration">Work: </label>
+          <select id="work-duration">
+            <option value="15">15 min</option>
+            <option value="25" selected>25 min</option>
+            <option value="30">30 min</option>
+            <option value="45">45 min</option>
+            <option value="60">60 min</option>
+          </select>
+          <label for="break-duration">Break: </label>
+          <select id="break-duration">
+            <option value="5" selected>5 min</option>
+            <option value="10">10 min</option>
+            <option value="15">15 min</option>
+          </select>
+        </div>
+        <div class="circular-timer">
+          <svg width="160" height="160">
+            <circle class="bg" cx="80" cy="80" r="70" />
+            <circle id="progress-circle" cx="80" cy="80" r="70" />
+          </svg>
+          <div id="timer-text">25:00</div>
+          <div id="timer-state">WORK</div>
+        </div>
+        <div class="timer-buttons">
+          <button id="start-timer" onclick="startTimer()"><i class="fas fa-play"></i> Start</button>
+          <button id="pause-timer" onclick="pauseTimer()"><i class="fas fa-pause"></i> Pause</button>
+          <button id="reset-timer" onclick="resetTimer()"><i class="fas fa-redo"></i> Reset</button>
+        </div>
+        <div class="session-counter">
+          Sessions completed: <span id="session-count">0</span>
+        </div>
+      </section>
+      
+      <!-- Weather Widget -->
+      <section class="weather-section">
+        <div class="section-header">
+          <h2>Weather</h2>
+          <div class="icon"><i class="fas fa-cloud-sun"></i></div>
+        </div>
+        <div class="weather-display">
+          <div class="weather-icon">
+            <i class="fas fa-sun"></i>
+          </div>
+          <div class="weather-temp">72°F</div>
+          <div class="weather-desc">Sunny</div>
+          <div class="weather-location">New York, NY</div>
+        </div>
+      </section>
+      
+      <!-- Notes Section -->
+      <section class="notes-section">
+        <div class="section-header">
+          <h2>Quick Notes</h2>
+          <div class="icon"><i class="fas fa-sticky-note"></i></div>
+        </div>
+        <textarea id="notes" rows="6" placeholder="Write quick notes here..."></textarea>
+        <button id="save-notes">Save Notes</button>
+      </section>
+    </div>
+  </div>
 
-    <!-- Theme Toggle (Optional) -->
+  <!-- Theme Toggle (Optional) -->
+  <div class="theme-options">
     <div class="theme-toggle">
-      <label for="color-picker">Background Color: </label>
+      <label for="color-picker">Background: </label>
       <input type="color" id="color-picker" value="#fdf6ec">
     </div>
+    <button id="dark-mode-toggle"><i class="fas fa-moon"></i> Dark Mode</button>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>

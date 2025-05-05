@@ -17,6 +17,12 @@ body {
   background-color: #fdf6ec;
 }
 
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
 header.main-header {
   text-align: center;
   margin-bottom: 30px;
@@ -41,10 +47,48 @@ header.main-header p {
   backdrop-filter: blur(10px);
   min-height: 100vh;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 30px;
-  padding: 40px;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  padding: 30px;
   justify-content: center;
+  border-radius: 20px;
+  margin-bottom: 40px;
+}
+
+/* Section Header */
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  padding-bottom: 8px;
+}
+
+.section-header h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #ffd369;
+}
+
+.section-header .icon {
+  background: rgba(255, 255, 255, 0.1);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.section-header .icon i {
+  font-size: 18px;
+  color: #ffd369;
+}
+
+.sub-header {
+  margin-top: 25px;
 }
 
 /* Quote Box */
@@ -58,22 +102,188 @@ header.main-header p {
   color: #fff;
 }
 
+#quote {
+  margin: 20px 0 10px;
+  line-height: 1.4;
+  font-style: italic;
+}
+
 #author {
   display: block;
   font-size: 0.9em;
   color: #ccc;
   margin-top: 10px;
+  margin-bottom: 15px;
+}
+
+.quote-button {
+  background-color: rgba(255, 255, 255, 0.2);
+  font-size: 0.7em;
+  padding: 8px 16px;
+  margin-top: 10px;
+  border-radius: 20px;
+  transition: all 0.3s ease;
+  margin-right: 8px;
+}
+
+.quote-button:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Saved Quotes */
+.saved-quotes-section {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 25px;
+  border-radius: 20px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(6px);
+}
+
+#saved-quotes-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-height: 250px;
+  overflow-y: auto;
+}
+
+#saved-quotes-list li {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 12px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  font-size: 0.9em;
+  position: relative;
+}
+
+#saved-quotes-list li .quote-text {
+  font-style: italic;
+  margin-bottom: 5px;
+}
+
+#saved-quotes-list li .quote-author {
+  font-size: 0.8em;
+  color: #ccc;
+}
+
+#saved-quotes-list li .delete-quote {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  font-size: 0.9em;
+  padding: 2px 6px;
+  border-radius: 50%;
+}
+
+#saved-quotes-list li .delete-quote:hover {
+  color: white;
+  background: rgba(255, 0, 0, 0.3);
 }
 
 /* Sections */
 .task-section,
-.timer-section {
+.timer-section,
+.weather-section,
+.notes-section {
   background: rgba(255, 255, 255, 0.15);
   padding: 25px;
   border-radius: 20px;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
   backdrop-filter: blur(6px);
   animation: fadeIn 0.8s ease forwards;
+}
+
+/* Task Section */
+.task-input-container {
+  display: flex;
+  gap: 10px;
+}
+
+.task-input-container input {
+  flex-grow: 1;
+}
+
+.task-input-container button {
+  white-space: nowrap;
+}
+
+/* Timer Section */
+.timer-settings {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 15px;
+  align-items: center;
+}
+
+.timer-settings select {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+#timer-state {
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, 10px);
+  font-size: 0.8em;
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: 300;
+}
+
+.session-counter {
+  text-align: center;
+  margin-top: 15px;
+  font-size: 0.9em;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* Weather Widget */
+.weather-section {
+  text-align: center;
+}
+
+.weather-display {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 15px;
+}
+
+.weather-icon i {
+  font-size: 3em;
+  color: #ffd369;
+  margin-bottom: 10px;
+}
+
+.weather-temp {
+  font-size: 2em;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.weather-desc {
+  margin-bottom: 10px;
+  font-size: 1.2em;
+}
+
+.weather-location {
+  font-size: 0.9em;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* Notes Section */
+.notes-section textarea {
+  resize: none;
+  height: 150px;
 }
 
 /* Inputs & Textareas */
@@ -102,11 +312,20 @@ button {
   cursor: pointer;
   transition: all 0.3s ease;
   margin: 5px 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
 }
 
 button:hover {
-  transform: scale(1.05);
+  transform: translateY(-2px);
   background-color: #ff5722;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+button i {
+  font-size: 0.9em;
 }
 
 /* Task List */
@@ -115,6 +334,8 @@ button:hover {
   padding: 0;
   margin-top: 15px;
   text-align: left;
+  max-height: 250px;
+  overflow-y: auto;
 }
 
 #task-list li {
@@ -126,12 +347,48 @@ button:hover {
   font-weight: 500;
   animation: fadeInUp 0.5s ease;
   cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#task-list li .task-text {
+  flex-grow: 1;
+}
+
+#task-list li .task-actions {
+  display: flex;
+  gap: 5px;
+}
+
+#task-list li .task-actions button {
+  background: none;
+  border: none;
+  color: #666;
+  padding: 0;
+  font-size: 16px;
+  cursor: pointer;
+  margin: 0;
+}
+
+#task-list li .task-actions button:hover {
+  color: #333;
+  transform: scale(1.2);
 }
 
 #task-list li:hover {
   background: rgba(255, 255, 255, 0.95);
   transform: translateY(-2px);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+#task-list li.completed {
+  opacity: 0.7;
+}
+
+#task-list li.completed .task-text {
+  text-decoration: line-through;
+  color: #666;
 }
 
 /* Circular Timer */
@@ -166,34 +423,134 @@ button:hover {
 
 #timer-text {
   position: absolute;
-  top: 50%;
+  top: 45%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-size: 1.5em;
+  font-size: 1.8em;
   color: #fff;
+  font-weight: 600;
 }
 
 .timer-buttons {
   display: flex;
   gap: 10px;
   justify-content: center;
-  margin-top: 10px;
+  margin-top: 15px;
 }
 
 /* Theme Toggle */
-.theme-toggle {
+.theme-options {
   position: fixed;
   bottom: 20px;
   right: 20px;
-  background: rgba(255, 255, 255, 0.2);
-  padding: 10px;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 15px;
   border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+  z-index: 100;
+}
+
+.theme-toggle {
   display: flex;
   align-items: center;
   gap: 10px;
+  color: white;
+}
+
+#dark-mode-toggle {
+  background: #333;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
 /* Dark Theme */
+body.dark-theme {
+  background-color: #121212;
+  color: #fff;
+}
+
+body.dark-theme textarea,
+body.dark-theme input[type="text"] {
+  background-color: #333;
+  color: #fff;
+}
+
+body.dark-theme button {
+  background-color: #444;
+  color: white;
+}
+
+body.dark-theme #task-list li {
+  background-color: #333;
+  color: white;
+}
+
+body.dark-theme .section-header h2 {
+  color: #90caf9;
+}
+
+body.dark-theme .section-header .icon i {
+  color: #90caf9;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .overlay {
+    padding: 20px;
+    gap: 20px;
+  }
+  
+  header.main-header h1 {
+    font-size: 2.5rem;
+  }
+  
+  .quote-box {
+    font-size: 1.2em;
+  }
+  
+  .theme-options {
+    bottom: 10px;
+    right: 10px;
+    padding: 10px;
+  }
+} Dark Theme */
 body.dark-theme {
   background-color: #121212;
   color: #fff;
