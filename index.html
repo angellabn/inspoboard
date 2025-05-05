@@ -1,3 +1,4 @@
+// index.html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>InspoBoard</title>
   <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
   <header class="main-header">
@@ -13,7 +15,6 @@
   </header>
 
   <div class="overlay">
-
     <!-- Quote Section -->
     <section class="quote-box">
       <blockquote id="quote">"Stay positive, work hard, make it happen."</blockquote>
@@ -23,12 +24,12 @@
     <!-- Task Section -->
     <section class="task-section">
       <h2>Your Daily Goals</h2>
-      <textarea id="goal-input" rows="3" placeholder="Write your goals here..."></textarea>
-      <button onclick="saveGoal()">Save Goals</button>
+      <textarea id="goals" rows="3" placeholder="Write your goals here..."></textarea>
+      <button id="save-goals" onclick="saveGoals()">Save Goals</button>
 
       <h2>Task List</h2>
-      <input type="text" id="task-input" placeholder="Add a task...">
-      <button onclick="addTask()">Add Task</button>
+      <input type="text" id="task" placeholder="Add a task...">
+      <button id="add-task" onclick="saveTasks()">Add Task</button>
       <ul id="task-list"></ul>
     </section>
 
@@ -43,13 +44,20 @@
         <div id="timer-text">25:00</div>
       </div>
       <div class="timer-buttons">
-        <button onclick="startTimer()">Start</button>
-        <button onclick="pauseTimer()">Pause</button>
-        <button onclick="resetTimer()">Reset</button>
+        <button id="start-timer" onclick="startTimer()">Start</button>
+        <button id="pause-timer" onclick="pauseTimer()">Pause</button>
+        <button id="reset-timer" onclick="resetTimer()">Reset</button>
       </div>
     </section>
+
+    <!-- Theme Toggle (Optional) -->
+    <div class="theme-toggle">
+      <label for="color-picker">Background Color: </label>
+      <input type="color" id="color-picker" value="#fdf6ec">
+    </div>
   </div>
 
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
   <script src="script.js"></script>
 </body>
 </html>

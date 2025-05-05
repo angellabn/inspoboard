@@ -1,3 +1,4 @@
+/* style.css */
 /* Global Styles */
 * {
   box-sizing: border-box;
@@ -19,6 +20,8 @@ body {
 header.main-header {
   text-align: center;
   margin-bottom: 30px;
+  padding-top: 20px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 header.main-header h1 {
@@ -98,6 +101,7 @@ button {
   font-size: 16px;
   cursor: pointer;
   transition: all 0.3s ease;
+  margin: 5px 0;
 }
 
 button:hover {
@@ -121,6 +125,13 @@ button:hover {
   margin-bottom: 10px;
   font-weight: 500;
   animation: fadeInUp 0.5s ease;
+  cursor: pointer;
+}
+
+#task-list li:hover {
+  background: rgba(255, 255, 255, 0.95);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 /* Circular Timer */
@@ -169,6 +180,19 @@ button:hover {
   margin-top: 10px;
 }
 
+/* Theme Toggle */
+.theme-toggle {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 10px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
 /* Dark Theme */
 body.dark-theme {
   background-color: #121212;
@@ -195,4 +219,20 @@ body.dark-theme button {
 @keyframes fadeInUp {
   from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .overlay {
+    padding: 20px;
+    gap: 20px;
+  }
+  
+  header.main-header h1 {
+    font-size: 2.5rem;
+  }
+  
+  .quote-box {
+    font-size: 1.2em;
+  }
 }
