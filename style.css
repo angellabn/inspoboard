@@ -1,3 +1,4 @@
+/* Global Styles */
 * {
   box-sizing: border-box;
   transition: all 0.3s ease;
@@ -12,6 +13,23 @@ body {
   background-repeat: no-repeat;
   color: #fff;
   overflow-x: hidden;
+  background-color: #fdf6ec;
+}
+
+header.main-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+header.main-header h1 {
+  font-size: 3rem;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+header.main-header p {
+  font-size: 1.2rem;
+  color: #666;
 }
 
 /* Overlay Container */
@@ -19,24 +37,11 @@ body {
   background: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(10px);
   min-height: 100vh;
-  padding: 40px 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: start;
-  text-align: center;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 30px;
-}
-
-/* Sections */
-.task-section, .timer-section {
-  background: rgba(255, 255, 255, 0.15);
-  padding: 25px;
-  border-radius: 20px;
-  width: 90%;
-  max-width: 500px;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
-  backdrop-filter: blur(6px);
+  padding: 40px;
+  justify-content: center;
 }
 
 /* Quote Box */
@@ -45,9 +50,9 @@ body {
   padding: 25px;
   border-radius: 20px;
   box-shadow: 0 4px 25px rgba(0, 0, 0, 0.4);
-  max-width: 700px;
   font-size: 1.4em;
   animation: fadeIn 1s ease;
+  color: #fff;
 }
 
 #author {
@@ -57,11 +62,22 @@ body {
   margin-top: 10px;
 }
 
+/* Sections */
+.task-section,
+.timer-section {
+  background: rgba(255, 255, 255, 0.15);
+  padding: 25px;
+  border-radius: 20px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(6px);
+  animation: fadeIn 0.8s ease forwards;
+}
+
 /* Inputs & Textareas */
 textarea,
 input[type="text"],
 input[type="color"] {
-  width: 80%;
+  width: 100%;
   padding: 12px;
   border-radius: 12px;
   border: none;
@@ -89,17 +105,6 @@ button:hover {
   background-color: #ff5722;
 }
 
-.container {
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 20px;
-}
-
-@keyframes wiggle {
-  0%, 100% { transform: rotate(-5deg); }
-  50% { transform: rotate(5deg); }
-}
-
 /* Task List */
 #task-list {
   list-style: none;
@@ -116,34 +121,6 @@ button:hover {
   margin-bottom: 10px;
   font-weight: 500;
   animation: fadeInUp 0.5s ease;
-}
-
-/* Dark Theme */
-body.dark-theme {
-  background-color: #121212;
-  color: #fff;
-}
-
-body.dark-theme textarea,
-body.dark-theme input[type="text"] {
-  background-color: #333;
-  color: #fff;
-}
-
-body.dark-theme button {
-  background-color: #444;
-  color: white;
-}
-
-/* Animations */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
 }
 
 /* Circular Timer */
@@ -190,4 +167,32 @@ body.dark-theme button {
   gap: 10px;
   justify-content: center;
   margin-top: 10px;
+}
+
+/* Dark Theme */
+body.dark-theme {
+  background-color: #121212;
+  color: #fff;
+}
+
+body.dark-theme textarea,
+body.dark-theme input[type="text"] {
+  background-color: #333;
+  color: #fff;
+}
+
+body.dark-theme button {
+  background-color: #444;
+  color: white;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
