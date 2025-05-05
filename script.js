@@ -1,4 +1,38 @@
 // script.js
+
+// script.js
+// Check authentication
+document.addEventListener('DOMContentLoaded', function() {
+  const currentUser = localStorage.getItem('inspoboard_current_user');
+  if (!currentUser) {
+    // Not logged in, redirect to the login page
+    window.location.href = 'login.html';
+    return;
+  }
+  
+  // Update header with username
+  const header = document.querySelector('.main-header p');
+  if (header) {
+    header.textContent = `${currentUser}'s daily dose of goals, tasks & focus`;
+  }
+  
+  // Add logout button to header
+  const mainHeader = document.querySelector('.main-header');
+  if (mainHeader) {
+    const logoutBtn = document.createElement('button');
+    logoutBtn.id = 'logout-btn';
+    logoutBtn.innerHTML = '<i class="fas fa-sign-out-alt"></i> Logout';
+    logoutBtn.style.position = 'absolute';
+    logoutBtn.style.right = '20px';
+    logoutBtn.style.top = '20px';
+    logoutBtn.addEventListener('click', function() {
+      localStorage.removeItem('inspoboard_current_user');
+      window.location.href = 'login.html';
+    });
+    mainHeader.style.position = 'relative';
+    mainHeader.appendChild(logoutBtn);
+  }
+});
 // 🌄 Set a beautiful background from Unsplash
 document.body.style.backgroundImage = `url('https://source.unsplash.com/1600x900/?inspiration,nature')`;
 
