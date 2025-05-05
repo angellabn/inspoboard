@@ -329,28 +329,200 @@ function celebrate() {
   }
 }
 
-// ☁️ Weather widget (mock data since no API key)
-function updateWeather() {
-  // This would normally use a weather API
-  // For now, we'll use mock data
-  const weatherIcons = [
-    { condition: "Sunny", icon: "fa-sun", temp: "72°F" },
-    { condition: "Cloudy", icon: "fa-cloud", temp: "65°F" },
-    { condition: "Rainy", icon: "fa-cloud-rain", temp: "58°F" },
-    { condition: "Snow", icon: "fa-snowflake", temp: "32°F" },
-    { condition: "Thunderstorm", icon: "fa-bolt", temp: "68°F" }
-  ];
+// habit track
+function setupHabitTracker() {
+  renderHabits();
   
-  const randomWeather = weatherIcons[Math.floor(Math.random() * weatherIcons.length)];
+  // Add event listener for adding new habits
+  const addHabitBtn = document.getElementById("add-habit");
+  const habitInput = document.getElementById("habit-input");
   
-  const weatherIcon = document.querySelector(".weather-icon i");
-  const weatherTemp = document.querySelector(".weather-temp");
-  const weatherDesc = document.querySelector(".weather-desc");
-  
-  if (weatherIcon) weatherIcon.className = `fas ${randomWeather.icon}`;
-  if (weatherTemp) weatherTemp.textContent = randomWeather.temp;
-  if (weatherDesc) weatherDesc.textContent = randomWeather.condition;
+  if (addHabitBtn && habitInput) {
+    addHabitBtn.addEventListener("click", () => {
+      const habitName = habitInput.value.trim();
+      if (habitName) {
+        addHabit(habitName);
+        habitInput.value = "";
+      }
+    });
+    
+    habitInput.addEventListener("keypress", (e) => {
+      if (e.key === "Enter") {
+        const habitName = habitInput.value.trim();
+        if (habitName) {
+          addHabit(habitName);
+          habitInput.value = "";
+        }
+      }
+    });
+  }
 }
+
+function addHabit(name) {
+  const habits = getHabits();
+  
+  // Check if habit already exists
+  if (habits.some(h => h.name.toLowerCase() === name.toLowerCase())) {
+    alert("This habit already exists!");
+    return;
+  }
+  
+  // Create a new habit with the last 7 days
+  const today = new Date();
+  const last7Days = [];
+  
+  for (let i = 6; i >= 0; i--) {
+    const date = new Date();
+    date.setDate(today.getDate() - i);
+    last7Days.push({
+      date: date.toISOString().split('T')[0],
+      completed: false
+    });
+  }
+  
+  habits.push({
+    name: name,
+    streak: 0,
+    days: last7Days
+  });
+  
+  saveHabits(habits);
+  renderHabits();
+}
+
+function toggleHabitDay(habitIndex, dayIndex) {
+  const habits = getHabits();
+  habits[habitIndex].days[dayIndex].completed = !habits[habitIndex].days[dayIndex].completed;
+  
+  // Recalculate streak
+  recalculateStreak(habits[habitIndex]);
+  
+  saveHabits(habits);
+  renderHabits();
+}
+
+function recalculateStreak(habit) {
+  // Reset streak
+  habit.streak = 0;
+  
+  // Go backwards from the most recent day
+  for (let i = habit.days.length - 1; i >= 0; i--) {
+    if (habit.days[i].completed) {
+      habit.streak++;
+    } else {
+      break;
+    }
+  }
+}
+
+function deleteHabit(index) {
+  if (confirm("Are you sure you want to delete this habit?")) {
+    const habits = getHabits();
+    habits.splice(index, 1);
+    saveHabits(habits);
+    renderHabits();
+  }
+}
+
+function getHabits() {
+  return JSON.parse(localStorage.getItem('habits')) || [];
+}
+
+function saveHabits(habits) {
+  localStorage.setItem('habits', JSON.stringify(habits));
+}
+
+function renderHabits() {
+  const habitList = document.getElementById("habit-list");
+  if (!habitList) return;
+  
+  habitList.innerHTML = "";
+  const habits = getHabits();
+  const today = new Date().toISOString().split('T')[0];
+  
+  if (habits.length === 0) {
+    const emptyItem = document.createElement("li");
+    emptyItem.className = "habit-item";
+    emptyItem.textContent = "No habits tracked yet. Add one above!";
+    habitList.appendChild(emptyItem);
+    return;
+  }
+  
+  habits.forEach((habit, habitIndex) => {
+    const habitItem = document.createElement("li");
+    habitItem.className = "habit-item";
+    
+    // Habit top line (name, streak, actions)
+    const topLine = document.createElement("div");
+    topLine.style.display = "flex";
+    topLine.style.justifyContent = "space-between";
+    topLine.style.alignItems = "center";
+    topLine.style.width = "100%";
+    
+    const habitName = document.createElement("div");
+    habitName.className = "habit-name";
+    habitName.textContent = habit.name;
+    
+    const habitStats = document.createElement("div");
+    habitStats.style.display = "flex";
+    habitStats.style.alignItems = "center";
+    
+    const streak = document.createElement("div");
+    streak.className = "habit-streak";
+    streak.innerHTML = `<i class="fas fa-fire"></i> ${habit.streak}`;
+    
+    const habitActions = document.createElement("div");
+    habitActions.className = "habit-actions";
+    
+    const deleteBtn = document.createElement("button");
+    deleteBtn.innerHTML = '<i class="fas fa-trash"></i>';
+    deleteBtn.title = "Delete habit";
+    deleteBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      deleteHabit(habitIndex);
+    });
+    
+    habitActions.appendChild(deleteBtn);
+    habitStats.appendChild(streak);
+    habitStats.appendChild(habitActions);
+    
+    topLine.appendChild(habitName);
+    topLine.appendChild(habitStats);
+    
+    // Habit day circles
+    const daysRow = document.createElement("div");
+    daysRow.className = "habit-days";
+    
+    // Get the weekday letters
+    const weekdays = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
+    
+    habit.days.forEach((day, dayIndex) => {
+      const dayCircle = document.createElement("div");
+      dayCircle.className = "habit-day";
+      if (day.completed) {
+        dayCircle.classList.add("completed");
+      }
+      if (day.date === today) {
+        dayCircle.classList.add("today");
+      }
+      
+      dayCircle.textContent = weekdays[new Date(day.date).getDay()];
+      dayCircle.title = new Date(day.date).toLocaleDateString();
+      
+      dayCircle.addEventListener("click", (e) => {
+        e.stopPropagation();
+        toggleHabitDay(habitIndex, dayIndex);
+      });
+      
+      daysRow.appendChild(dayCircle);
+    });
+    
+    habitItem.appendChild(topLine);
+    habitItem.appendChild(daysRow);
+    habitList.appendChild(habitItem);
+  });
+}
+
 
 // 🚀 Load saved state on page load
 window.onload = () => {
@@ -381,7 +553,7 @@ window.onload = () => {
   renderSavedQuotes();
   updateTimerDisplay();
   setupTimerSettings();
-  updateWeather();
+  setupHabitTracker();
   
   // Set up event listeners
   setupButtons();

@@ -246,38 +246,121 @@ header.main-header p {
   color: rgba(255, 255, 255, 0.8);
 }
 
-/* Weather Widget */
-.weather-section {
-  text-align: center;
+/* habit tracker */
+.habit-section {
+  text-align: left;
+  background: rgba(255, 255, 255, 0.15);
+  padding: 25px;
+  border-radius: 20px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(6px);
 }
 
-.weather-display {
+.habit-input-container {
   display: flex;
-  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.habit-input-container input {
+  flex-grow: 1;
+}
+
+.habit-input-container button {
+  padding: 8px 12px;
+}
+
+#habit-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-height: 250px;
+  overflow-y: auto;
+}
+
+.habit-item {
+  display: flex;
+  justify-content: space-between;
   align-items: center;
-  padding: 15px;
-}
-
-.weather-icon i {
-  font-size: 3em;
-  color: #ffd369;
+  background: rgba(255, 255, 255, 0.9);
+  color: #333;
+  padding: 12px 15px;
+  border-radius: 10px;
   margin-bottom: 10px;
+  animation: fadeInUp 0.5s ease;
 }
 
-.weather-temp {
-  font-size: 2em;
+.habit-name {
+  flex-grow: 1;
+  font-weight: 500;
+}
+
+.habit-streak {
+  background: #ffd369;
+  color: #333;
+  border-radius: 20px;
+  padding: 3px 10px;
+  font-size: 0.8em;
   font-weight: 600;
-  margin-bottom: 5px;
+  margin-right: 10px;
 }
 
-.weather-desc {
-  margin-bottom: 10px;
-  font-size: 1.2em;
+.habit-actions {
+  display: flex;
+  gap: 10px;
 }
 
-.weather-location {
-  font-size: 0.9em;
-  color: rgba(255, 255, 255, 0.7);
+.habit-actions button {
+  background: none;
+  border: none;
+  color: #666;
+  padding: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  margin: 0;
+}
+
+.habit-actions button:hover {
+  color: #333;
+  transform: scale(1.2);
+}
+
+.habit-days {
+  display: flex;
+  gap: 3px;
+  margin-top: 5px;
+}
+
+.habit-day {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7em;
+  background: #eee;
+  color: #999;
+  cursor: pointer;
+}
+
+.habit-day.completed {
+  background: #4CAF50;
+  color: white;
+}
+
+.habit-day.today {
+  border: 2px solid #ff7f50;
+}
+
+body.dark-theme .habit-item {
+  background: rgba(70, 70, 70, 0.9);
+  color: #fff;
+}
+
+body.dark-theme .habit-day {
+  background: #555;
+  color: #ccc;
 }
 
 /* Notes Section */
