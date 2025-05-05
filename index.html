@@ -2,74 +2,54 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>InspoBoard</title>
-  <link rel="stylesheet" href="style.css"/>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
-<style>
-  body {
-    font-family: 'Poppins', sans-serif;
-    background-color: #fdf6ec;
-    color: #333;
-    margin: 0;
-    padding: 20px;
-  }
-</style>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <header class="main-header">
+    <h1>🎨 InspoBoard</h1>
+    <p>Your daily dose of goals, tasks & focus</p>
+  </header>
+
   <div class="overlay">
-    
-    <!-- 🎨 Color Picker -->
-    <div class="color-picker-section">
-      <label for="color-picker">🎨 Pick a background color:</label>
-      <input type="color" id="color-picker" />
-    </div>
 
-    <!-- ✨ Daily Quote -->
-    <p id="quote"></p>
+    <!-- Quote Section -->
+    <section class="quote-box">
+      <blockquote id="quote">"Stay positive, work hard, make it happen."</blockquote>
+      <cite id="author">– Unknown</cite>
+    </section>
 
-    
-    <!-- 🎯 Goals Section -->
-    <div class="task-section">
-      <h3>🎯 Your Daily Goals</h3>
-      <textarea id="goals" placeholder="What are your goals today?"></textarea>
-      <button onclick="saveGoals()">Save Goals</button>
-    </div>
+    <!-- Task Section -->
+    <section class="task-section">
+      <h2>Your Daily Goals</h2>
+      <textarea id="goal-input" rows="3" placeholder="Write your goals here..."></textarea>
+      <button onclick="saveGoal()">Save Goals</button>
 
-    <!-- ✅ Task Manager -->
-    <div class="task-section">
-      <h3>📝 Task List</h3>
-      <input type="text" id="task" placeholder="Add a new task" />
-      <button onclick="saveTasks()">Add Task</button>
+      <h2>Task List</h2>
+      <input type="text" id="task-input" placeholder="Add a task...">
+      <button onclick="addTask()">Add Task</button>
       <ul id="task-list"></ul>
-    </div>
+    </section>
 
-   
-    <div class="container">
-      <ABEEE HIIIIIIIIII>
-    </div>
-    
-
-    <!-- Pomodoro Timer Section -->
-    <div class="timer-section">
-      <h3>Pomodoro Timer</h3>
+    <!-- Timer Section -->
+    <section class="timer-section">
+      <h2>Pomodoro Timer</h2>
       <div class="circular-timer">
         <svg width="160" height="160">
-          <circle cx="80" cy="80" r="70" class="bg"></circle>
-          <circle cx="80" cy="80" r="70" id="progress-circle"></circle>
+          <circle class="bg" cx="80" cy="80" r="70" />
+          <circle id="progress-circle" cx="80" cy="80" r="70" />
         </svg>
         <div id="timer-text">25:00</div>
       </div>
       <div class="timer-buttons">
-        <button id="start-timer">Start</button>
-        <button id="pause-timer">Pause</button>
-        <button id="reset-timer">Reset</button>
+        <button onclick="startTimer()">Start</button>
+        <button onclick="pauseTimer()">Pause</button>
+        <button onclick="resetTimer()">Reset</button>
       </div>
-    </div>
+    </section>
   </div>
 
-  <!-- Adding the Canvas Confetti Script -->
-  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.min.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
